@@ -11,8 +11,7 @@ def menu
   puts '---Welcome to the Eight Ball---'
   puts '1) Ask the eightball a question'
   puts '2) Type QUIT to exit the eightball'
-  puts '3) Enter a random question'
-  puts '4) '
+  puts '3) Type 3 to enter a random question'
   choice = gets.chomp
   menu_options(choice)
 end
@@ -25,25 +24,44 @@ def menu_options(choice)
       puts 'So be it'
     when 'QUIT'
       puts 'The eightball has feelings too!'
+      exit
     when '3'
       puts @questions.sample
       puts @responses.last
+    when 'easter eggs' #This menu reveals the easter eggs
+      puts 'Type reveal to show list of commands'
+      puts 'Type add_answer to add a response'
+      menu
+    when 'reveal'
+      puts "These are the answers"
+      unique = @responses.uniq
+      puts unique
+      menu
+    when 'add answer'
+      add_answer
+
   end
 end
 
+def add_answer
+  puts 'What answer would you like to add'
+  input = gets.chomp
+  @responses << input
+  menu
+end
+
 def ask_eightball
-  puts "What is your question"
+    puts "What is your question"
     input = gets.chomp
-    puts @responses.sample
   case input
+    when 'add answer'
+      add_answer
     when 'reveal'
       puts "These are the answers"
-      puts @responses
-    when 'add answer'
-      puts 'What answer would you like to add'
-      input = gets.chomp
-      @responses << input
+      unique = @responses.uniq
+      puts unique
   end
+  @responses.uniq
   menu
 end
 

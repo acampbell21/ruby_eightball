@@ -45,14 +45,16 @@ end
 
 def add_answer
   puts 'What answer would you like to add'
-  input = gets.chomp
-  @responses << input
+  user_input = gets.chomp #When add_answer gets used it repeats the response or
+  @responses << user_input #the last question answered, fixed this problem
   menu
 end
+
 
 def ask_eightball
     puts "What is your question"
     input = gets.chomp
+    puts @responses.sample
   case input
     when 'add answer'
       add_answer
@@ -61,7 +63,6 @@ def ask_eightball
       unique = @responses.uniq
       puts unique
   end
-  @responses.uniq
   menu
 end
 
